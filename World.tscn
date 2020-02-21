@@ -1,20 +1,82 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Scripts/Camera.gd" type="Script" id=1]
 [ext_resource path="res://Scripts/World.gd" type="Script" id=2]
+[ext_resource path="res://Assets/rigzsoft/Smoke/CloudPart.png" type="Texture" id=3]
+[ext_resource path="res://Assets/rigzsoft/Nature/Snow1.png" type="Texture" id=4]
+[ext_resource path="res://Assets/kenney.nl/fire_02.png" type="Texture" id=5]
+
+[sub_resource type="Gradient" id=1]
+colors = PoolColorArray( 0.257813, 0.257813, 0.257813, 1, 1, 1, 1, 1 )
+
+[sub_resource type="GradientTexture" id=2]
+gradient = SubResource( 1 )
+
+[sub_resource type="ParticlesMaterial" id=3]
+emission_shape = 2
+emission_box_extents = Vector3( 50, 5, 1 )
+flag_disable_z = true
+gravity = Vector3( 0, -30, 0 )
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+angle = 40.0
+angle_random = 1.0
+scale = 0.1
+color_ramp = SubResource( 2 )
+
+[sub_resource type="ParticlesMaterial" id=4]
+emission_shape = 2
+emission_box_extents = Vector3( 30, 5, 1 )
+flag_disable_z = true
+gravity = Vector3( 0, 98, 0 )
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+angle = 45.0
+angle_random = 1.0
+scale = 0.5
+scale_random = 1.0
+
+[sub_resource type="Gradient" id=5]
+offsets = PoolRealArray( 0, 0.503704, 1 )
+colors = PoolColorArray( 1, 1, 1, 1, 1, 0.632813, 0, 1, 1, 0, 0, 1 )
+
+[sub_resource type="GradientTexture" id=6]
+gradient = SubResource( 5 )
+
+[sub_resource type="ParticlesMaterial" id=7]
+emission_shape = 2
+emission_box_extents = Vector3( 10, 20, 1 )
+flag_disable_z = true
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 25.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+linear_accel = 20.0
+scale = 0.2
+color_ramp = SubResource( 6 )
 
 [node name="World" type="Node2D"]
 script = ExtResource( 2 )
 
 [node name="Particles1" type="Particles2D" parent="."]
 position = Vector2( 128, 256 )
+process_material = SubResource( 3 )
+texture = ExtResource( 3 )
 
 [node name="Particles2" type="Particles2D" parent="."]
 position = Vector2( 512, 256 )
+process_material = SubResource( 4 )
+texture = ExtResource( 4 )
 
 [node name="Particles3" type="Particles2D" parent="."]
 position = Vector2( 896, 256 )
+rotation = -1.5708
+amount = 50
+lifetime = 2.0
+process_material = SubResource( 7 )
+texture = ExtResource( 5 )
 
 [node name="Camera" type="Camera2D" parent="."]
 position = Vector2( 512, 304 )
+current = true
 script = ExtResource( 1 )
